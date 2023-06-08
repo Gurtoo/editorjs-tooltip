@@ -67,8 +67,8 @@ export default class Tooltip {
     const observer = new MutationObserver((mutationList) => {
       mutationList.forEach((mutation) => {
         if (mutation.type === 'childList') {
-          const content = tooltipContent.textContent || 'подсказка1';
-          if (document.querySelector(`[data-tooltip="${content || 'подсказка2'}"]`)) {
+          const content = tooltipContent.textContent || '';
+          if (document.querySelector(`[data-tooltip="${content || ''}"]`)) {
             if (this.backgroundColor) this.setTooltipColor();
             if (this.textColor) this.setTooltipTextColor();
           } else {
@@ -153,7 +153,7 @@ export default class Tooltip {
    */
   createTooltip(tooltipValue, spanTooltip = this.spanTooltip) {
     if (this.spanTooltip) {
-      this.spanTooltip.dataset.tooltip = tooltipValue || 'подсказка3';
+      this.spanTooltip.dataset.tooltip = tooltipValue || 'подсказка';
       this.setBackgroundColor(this.spanTooltip);
       this.setUnderlineDecoration(this.spanTooltip);
     } else {
@@ -275,7 +275,7 @@ export default class Tooltip {
     this.tooltipInput.classList.add(this.api.styles.input);
     this.tooltipInput.classList.add(this.CSS.input);
     if (this.spanTooltip && this.tooltipInput) {
-      this.tooltipInput.value = this.spanTooltip.dataset.tooltip || 'подсказка4';
+      this.tooltipInput.value = this.spanTooltip.dataset.tooltip || '';
     }
     this.tooltipInput.hidden = true;
 
@@ -289,7 +289,7 @@ export default class Tooltip {
     this.tooltipInput.hidden = false;
     this.api.listeners.on(this.tooltipInput, 'keydown', (e) => {
       if (e.key === 'Enter') {
-        const tooltipValue = this.tooltipInput.value || 'подсказка5';
+        const tooltipValue = this.tooltipInput.value || '';
         this.createTooltip(tooltipValue);
         this.closeToolbar();
       }
