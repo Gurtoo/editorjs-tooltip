@@ -152,8 +152,9 @@ export default class Tooltip {
    * @param {HTMLElement} spanTooltip is the selected text where the tooltip is created
    */
   createTooltip(tooltipValue, spanTooltip = this.spanTooltip) {
+    const value = tooltipValue || 'подсказка';
     if (this.spanTooltip) {
-      this.spanTooltip.dataset.tooltip = tooltipValue || 'подсказка';
+      this.spanTooltip.dataset.tooltip = value;
       this.setBackgroundColor(this.spanTooltip);
       this.setUnderlineDecoration(this.spanTooltip);
     } else {
@@ -161,7 +162,7 @@ export default class Tooltip {
       this.setUnderlineDecoration(spanTooltip);
     }
     const { tooltipLocation } = this;
-    this.api.tooltip.onHover(spanTooltip, tooltipValue, { placement: tooltipLocation });
+    this.api.tooltip.onHover(spanTooltip, value, { placement: tooltipLocation });
   }
 
   /**
