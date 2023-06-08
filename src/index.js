@@ -153,7 +153,7 @@ export default class Tooltip {
    */
   createTooltip(tooltipValue, spanTooltip = this.spanTooltip) {
     if (this.spanTooltip) {
-      this.spanTooltip.dataset.tooltip = tooltipValue;
+      this.spanTooltip.dataset.tooltip = tooltipValue || '';
       this.setBackgroundColor(this.spanTooltip);
       this.setUnderlineDecoration(this.spanTooltip);
     } else {
@@ -271,12 +271,11 @@ export default class Tooltip {
   renderActions() {
     this.spanTooltip = this.api.selection.findParentTag(this.tag);
     this.tooltipInput = document.createElement('input');
-    this.tooltipInput.placeholder = 'Add a tooltip';
+    this.tooltipInput.placeholder = 'Вставьте подсказку';
     this.tooltipInput.classList.add(this.api.styles.input);
     this.tooltipInput.classList.add(this.CSS.input);
     if (this.spanTooltip) {
-      const tooltipStored = this.spanTooltip.dataset.tooltip;
-      this.tooltipInput.value = tooltipStored;
+      this.tooltipInput.value = this.spanTooltip.dataset.tooltip;
     }
     this.tooltipInput.hidden = true;
 
@@ -290,7 +289,7 @@ export default class Tooltip {
     this.tooltipInput.hidden = false;
     this.api.listeners.on(this.tooltipInput, 'keydown', (e) => {
       if (e.key === 'Enter') {
-        const tooltipValue = this.tooltipInput.value;
+        const tooltipValue = this.tooltipInput.value || '';
         this.createTooltip(tooltipValue);
         this.closeToolbar();
       }
