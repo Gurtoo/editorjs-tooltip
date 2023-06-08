@@ -271,11 +271,11 @@ export default class Tooltip {
   renderActions() {
     this.spanTooltip = this.api.selection.findParentTag(this.tag);
     this.tooltipInput = document.createElement('input');
-    this.tooltipInput.placeholder = 'Вставьте подсказку';
+    this.tooltipInput.placeholder = 'Вставьте подсказку, чтобы закрепить нажмите "Enter"';
     this.tooltipInput.classList.add(this.api.styles.input);
     this.tooltipInput.classList.add(this.CSS.input);
     if (this.spanTooltip) {
-      this.tooltipInput.value = this.spanTooltip.dataset.tooltip;
+      this.tooltipInput.value = this.spanTooltip.dataset.tooltip || '';
     }
     this.tooltipInput.hidden = true;
 
