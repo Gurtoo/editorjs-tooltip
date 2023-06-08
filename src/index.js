@@ -68,7 +68,7 @@ export default class Tooltip {
       mutationList.forEach((mutation) => {
         if (mutation.type === 'childList') {
           const content = tooltipContent.textContent || '';
-          if (document.querySelector(`[data-tooltip="${content || 'подсказка'}"]`)) {
+          if (document.querySelector(`[data-tooltip="${content || ''}"]`)) {
             if (this.backgroundColor) this.setTooltipColor();
             if (this.textColor) this.setTooltipTextColor();
           } else {
@@ -271,10 +271,10 @@ export default class Tooltip {
   renderActions() {
     this.spanTooltip = this.api.selection.findParentTag(this.tag);
     this.tooltipInput = document.createElement('input');
-    this.tooltipInput.placeholder = 'Вставьте подсказку, чтобы закрепить нажмите "Enter"';
+    this.tooltipInput.placeholder = 'Вставьте подсказку';
     this.tooltipInput.classList.add(this.api.styles.input);
     this.tooltipInput.classList.add(this.CSS.input);
-    if (this.spanTooltip) {
+    if (this.spanTooltip && this.tooltipInput) {
       this.tooltipInput.value = this.spanTooltip.dataset.tooltip || '';
     }
     this.tooltipInput.hidden = true;
