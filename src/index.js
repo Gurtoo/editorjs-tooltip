@@ -67,8 +67,8 @@ export default class Tooltip {
     const observer = new MutationObserver((mutationList) => {
       mutationList.forEach((mutation) => {
         if (mutation.type === 'childList') {
-          const content = tooltipContent.textContent;
-          if (document.querySelector(`[data-tooltip="${content}"]`)) {
+          const content = tooltipContent.textContent || '';
+          if (document.querySelector(`[data-tooltip="${content || ''}"]`)) {
             if (this.backgroundColor) this.setTooltipColor();
             if (this.textColor) this.setTooltipTextColor();
           } else {
