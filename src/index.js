@@ -138,7 +138,9 @@ export default class Tooltip {
         && mutation.target.classList.contains('codex-editor__redactor')) {
           const spanTooltips = document.querySelectorAll('.cdx-tooltip');
 
-          spanTooltips.forEach((span) => this.createTooltip(span.dataset.tooltip, span));
+          spanTooltips.forEach((span) => {
+            this.createTooltip(span.dataset.tooltip || span.innerHTML, span);
+          });
         }
       });
     });
