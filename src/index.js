@@ -43,6 +43,7 @@ export default class Tooltip {
     this.backgroundColor = config.backgroundColor;
     this.textColor = config.textColor;
     this.editorId = config.holder ? config.holder : 'editorjs';
+    this.placeholder = config.placeholder ? config.placeholder : 'Вставьте подсказку';
 
     this.tag = 'SPAN';
 
@@ -202,6 +203,7 @@ export default class Tooltip {
    */
 
   render() {
+    if (this.backgroundColor || this.textColor) this.customTooltip();
     this.button = document.createElement('button');
     this.button.type = 'button';
     this.button.innerHTML = tooltipIcon;
@@ -274,10 +276,10 @@ export default class Tooltip {
   renderActions() {
     this.spanTooltip = this.api.selection.findParentTag(this.tag);
     this.tooltipInput = document.createElement('input');
-    this.tooltipInput.placeholder = 'Вставьте подсказку';
+    this.tooltipInput.placeholder = this.placeholder;
     this.tooltipInput.classList.add(this.api.styles.input);
     this.tooltipInput.classList.add(this.CSS.input);
-    if (this.spanTooltip && this.tooltipInput) {
+    if (this.spanTooltip?.dataset?.tooltip && this.tooltipInput) {
       this.tooltipInput.value = this.spanTooltip.dataset.tooltip || '';
     }
     this.tooltipInput.hidden = true;
